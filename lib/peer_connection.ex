@@ -502,7 +502,7 @@ defmodule DBux.PeerConnection do
     if @debug, do: Logger.debug("[DBux.PeerConnection #{inspect(self())}] Init, mod = #{inspect(mod)}, mod_options = #{inspect(mod_options)}")
 
     {:ok, address, auth_mechanisms, mod_state} = mod.init(mod_options)
-    {:ok, {transport_mod, transport_opts}} = DBux.Transport.get_module_for_address(address)
+    {:ok, {transport_mod, transport_opts}} = DBux.Transport.get_module_for_address(address) |> IO.inspect()
     {:ok, {auth_mod, auth_opts}} = DBux.Auth.get_module_for_method(hd(auth_mechanisms)) # TODO support more mechanisms
 
     {:ok, transport_proc} = transport_mod.start_link(self(), transport_opts)
