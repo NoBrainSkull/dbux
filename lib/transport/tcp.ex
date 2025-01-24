@@ -68,7 +68,7 @@ defmodule DBux.Transport.TCP do
     if @debug, do: Logger.debug("[DBux.Transport.TCP #{inspect(self())}] Init")
 
     {:ok,
-     %{parent: parent, sock: nil, state: :handshake, host: options[:host], port: options[:port]}}
+     %{parent: parent, sock: options[:sock], state: :handshake, host: options[:host], port: options[:port]}}
   end
 
   @doc false
@@ -101,7 +101,7 @@ defmodule DBux.Transport.TCP do
           "[DBux.Transport.TCP #{inspect(self())}] Connect: Failed to connect to socket #{sock}: #{inspect(reason)}"
         )
 
-        {:backoff, @reconnect_timeout, %{state | sock: nil, state: :handshake}}
+        {:backoff, @reconnect_timeout, %{state | state: :handshake}}
     end
   end
 
