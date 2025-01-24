@@ -15,7 +15,7 @@ defmodule DBux.Transport.TCP do
   @connect_timeout 3000
   @reconnect_timeout 1000
 
-  @debug !is_nil(System.get_env("DBUX_DEBUG"))
+  @debug true
 
   def start_link(parent, options) do
     if @debug, do: Logger.debug("[DBux.Transport.TCP #{inspect(self())}] Start link")
