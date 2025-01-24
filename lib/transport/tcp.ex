@@ -59,6 +59,7 @@ defmodule DBux.Transport.TCP do
           "[DBux.Transport.TCP #{inspect(self())}] Do begin: #{inspect(transport_proc)}"
         )
 
+
     Connection.call(transport_proc, :begin)
   end
 
