@@ -505,9 +505,9 @@ defmodule DBux.PeerConnection do
     {:ok, {transport_mod, transport_opts}} = DBux.Transport.get_module_for_address(address) |> IO.inspect()
     {:ok, {auth_mod, auth_opts}} = DBux.Auth.get_module_for_method(hd(auth_mechanisms)) # TODO support more mechanisms
 
-    {:ok, transport_proc} = transport_mod.start_link(self(), transport_opts)
-    {:ok, auth_proc}      = auth_mod.start_link(self(), auth_opts)
-    {:ok, serial_proc}    = DBux.Serial.start_link()
+    {:ok, transport_proc} = transport_mod.start_link(self(), transport_opts) |> IO.inspect()
+    {:ok, auth_proc}      = auth_mod.start_link(self(), auth_opts) |> IO.inspect
+    {:ok, serial_proc}    = DBux.Serial.start_link() |> IO.inspect
 
     initial_state = %{
       mod:                 mod,
