@@ -98,7 +98,7 @@ defmodule DBux.Transport.TCP do
 
       {:error, reason} ->
         Logger.warn(
-          "[DBux.Transport.TCP #{inspect(self())}] Connect: Failed to connect to socket #{socket}: #{inspect(reason)}"
+          "[DBux.Transport.TCP #{inspect(self())}] Connect: Failed to connect to socket #{sock}: #{inspect(reason)}"
         )
 
         {:backoff, @reconnect_timeout, %{state | sock: nil, state: :handshake}}
