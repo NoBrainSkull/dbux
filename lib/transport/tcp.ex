@@ -59,7 +59,6 @@ defmodule DBux.Transport.TCP do
           "[DBux.Transport.TCP #{inspect(self())}] Do begin: #{inspect(transport_proc)}"
         )
 
-
     Connection.call(transport_proc, :begin)
   end
 
@@ -68,11 +67,19 @@ defmodule DBux.Transport.TCP do
     if @debug, do: Logger.debug("[DBux.Transport.TCP #{inspect(self())}] Init")
 
     {:ok,
-     %{parent: parent, sock: options[:sock], state: :handshake, host: options[:host], port: options[:port]}}
+     %{
+       parent: parent,
+       sock: options[:sock],
+       state: :handshake,
+       host: options[:host],
+       port: options[:port]
+     }}
   end
 
   @doc false
   def connect(_, %{sock: sock} = state) when is_binary(sock) do
+    IO.puts("sock is #{inspect(sock)}")
+
     if @debug,
       do:
         Logger.debug(
@@ -106,6 +113,8 @@ defmodule DBux.Transport.TCP do
   end
 
   def connect(_, %{host: host, port: port} = state) do
+    IO.inspect(state)
+
     if @debug,
       do:
         Logger.debug(
